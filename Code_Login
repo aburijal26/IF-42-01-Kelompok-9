@@ -1,22 +1,25 @@
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JTextField;
-import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Font;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import Home.Tampilan_Utama;
+
+
 
 public class Login {
 
  private JFrame frame;
  private JTextField usernamefield;
- private JPasswordField password;
+ private JPasswordField passwordField;
 
  /**
   * Launch the application.
@@ -63,34 +66,40 @@ public class Login {
   Password.setBounds(10, 89, 91, 14);
   frame.getContentPane().add(Password);
   
-  password = new JPasswordField();
-  password.setBounds(155, 86, 86, 20);
-  frame.getContentPane().add(password);
-  
   JButton Login = new JButton("Login");
   Login.addActionListener(new ActionListener() {
    public void actionPerformed(ActionEvent e) {
-    String password = Password.getText();
+    
+	String password = passwordField.getText();
     String username = usernamefield.getText();
     
     if (password.contains("Admin") && username.contains("Admin")) {
-     JOptionPane.showInternalMessageDialog(null, "Login Berhasil");
+    	passwordField.setText(null);
+    	usernamefield.setText(null);
+    	
+    	//Tampilan_Utama info = new Tampilan_Utama();
+    	Tampilan_Utama.main(null);
     }
     
     else
     {
-     JOptionPane.showInternalMessageDialog(null,"EROR", "Login Gagal",JOptionPane.ERROR_MESSAGE);
-     
+    	JOptionPane.showInternalMessageDialog(null,"Cek Kembali Usename dan Password Anda!", "Login Gagal",JOptionPane.ERROR_MESSAGE);
+    	passwordField.setText(null);
+    	usernamefield.setText(null);
     }
    }
   });
-  Login.setBounds(303, 133, 89, 23);
+  Login.setBounds(10, 141, 89, 23);
   frame.getContentPane().add(Login);
   
-  JLabel lblNewLabel = new JLabel("Login");
+  JLabel lblNewLabel = new JLabel("My Laundry");
   lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
   lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 17));
   lblNewLabel.setBounds(10, 0, 414, 31);
   frame.getContentPane().add(lblNewLabel);
+  
+  passwordField = new JPasswordField();
+  passwordField.setBounds(155, 86, 86, 20);
+  frame.getContentPane().add(passwordField);
  }
 }
